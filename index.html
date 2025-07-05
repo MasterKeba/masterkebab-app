@@ -1,74 +1,34 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+"Bir web uygulaması geliştirmek istiyorum. Bu uygulama için aşağıdaki bileşenleri ve özellikleri içeren mükemmel kodlar oluşturmanı istiyorum:
 
-const Header = () => (
-  <header className="text-center p-6 text-2xl font-bold bg-white shadow-md">
-    <h1>Master Kebab</h1>
-    <nav className="mt-2 space-x-4">
-      <Link to="/" className="hover:underline">Home</Link>
-      <Link to="/menu" className="hover:underline">Menu</Link>
-      <Link to="/gallery" className="hover:underline">Gallery</Link>
-      <Link to="/contact" className="hover:underline">Contact</Link>
-    </nav>
-  </header>
-);
+1. index.html:
 
-const Home = () => (
-  <motion.div className="p-6 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-    <h2 className="text-xl font-semibold mb-4">Welcome to Master Kebab!</h2>
-    <p>Best kebab in town. Afiyet olsun!</p>
-  </motion.div>
-);
+Modern, responsive ve kullanıcı dostu bir tasarım.
 
-const Menu = () => (
-  <div className="p-6">
-    <h2 className="text-xl font-bold mb-4">Menu</h2>
-    <ul className="space-y-2">
-      <li className="border-b pb-2">Döner Kebab - €8.00</li>
-      <li className="border-b pb-2">Kapsalon - €9.50</li>
-      <li className="border-b pb-2">Falafel Wrap - €7.00</li>
-    </ul>
-  </div>
-);
+Temiz ve anlaşılır bir HTML yapısı.
 
-const Gallery = () => (
-  <div className="p-6 grid grid-cols-2 gap-4">
-    <img src="/img1.jpg" alt="Kebab 1" className="rounded shadow" />
-    <img src="/img2.jpg" alt="Kebab 2" className="rounded shadow" />
-    <img src="/img3.jpg" alt="Inside" className="rounded shadow" />
-    <img src="/img4.jpg" alt="Outside" className="rounded shadow" />
-  </div>
-);
+Gerekli tüm meta etiketleri ve SEO dostu içerik.
 
-const Contact = () => (
-  <div className="p-6 text-center">
-    <h2 className="text-xl font-semibold">Contact</h2>
-    <p className="mt-2">Tilburg, Netherlands</p>
-    <p>Phone: +31 6 12345678</p>
-    <a
-      href="https://goo.gl/maps/xyz"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-blue-500 underline"
-    >
-      View on Google Maps
-    </a>
-  </div>
-);
 
-const App = () => (
-  <Router>
-    <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </div>
-  </Router>
-);
 
-export default App;
+2. app.js:
+
+React kullanarak komponent tabanlı bir yapı.
+
+React Router ile sayfa yönlendirmeleri.
+
+Kullanıcı etkileşimini sağlayan animasyonlar veya geçişler (örneğin, Framer Motion ile).
+
+
+
+3. style.css:
+
+Tailwind CSS veya benzeri bir framework kullanarak stil yönetimi.
+
+Mobil uyumlu, duyarlı (responsive) tasarım.
+
+Modern ve estetik bir görünüm.
+
+
+
+
+Lütfen bu bileşenleri en iyi uygulama pratiklerine uygun şekilde hazırla. Uygulamayı geliştirirken temiz, okunabilir ve sürdürülebilir kodlar kullan. Ayrıca, kodun anlaşılır ve açıklayıcı olması için yorum satırları eklemeyi de unutma."
