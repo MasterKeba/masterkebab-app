@@ -1,8 +1,49 @@
-graph TD
-  A[Müşteri Web’e Giriş] --> B{Kampanya Görüntüle}
-  B --> C[Menüde Gezin + Özelleştir]
-  C --> D[Sepete Ekle]
-  D --> E[Ödeme Yap]
-  E --> F[Sipariş Restoran Paneline Uyarı Olarak Gelir]
-  F --> G[Stok Otomatik Güncellenir]
-  G --> H[Müşteriye SMS/Push ile Durum Bilgisi]
+"MasterKebab fast food restoranı için modern bir web uygulaması geliştir. 
+Tüm kodlar tek sayfada çalışsın (SPA). 
+
+**Temel Özellikler:**
+1. Ana Sayfa:
+   - Büyük hero banner (1100px) arka plan resmi alanı
+   - Kayan promosyon barı (CSS animasyonlu)
+   - Hızlı erişim butonları: Menü, Kampanyalar, Lokasyon
+
+2. Akıllı Menü Sistemi:
+   - Kategoriler: Kebaplar, Burgerler, Tavuk, Salatalar
+   - Dinamik ürün kartları (resim, fiyat, popüler etiketi)
+   - Özelleştirme modali: 
+     * Sos seçimi (Acılı, Yoğurtlu, Özel) 
+     * Ekstralar (Peynir +₺5, Zeytin +₺3)
+     * Not alanı
+
+3. Sepet ve Ödeme:
+   - Gerçek zamanlı sepet güncelleme
+   - Teslimat tipi seçimi (Gel Al / Getir)
+   - Adres entegrasyonu (Google Maps iframe)
+   - Ödeme simülasyonu (kredi kartı görseli)
+
+4. Mobil Uyum:
+   - Responsive hamburger menü
+   - Viewport uyumlu grid sistemi
+
+**Teknik Gereksinimler:**
+- Pure JavaScript (harici kütüphane YOK)
+- CSS Flexbox/Grid kullan
+- localStorage ile sepet kalıcılığı
+- Tüm fonksiyonlar app.js'de
+- Tek HTML dosyasında bileşenler:
+   • <div id="hero"></div>
+   • <section class="menu-cards"></section>
+   • <aside id="cart-sidebar"></aside>
+   • <div id="custom-modal" class="hidden"></div>
+
+**Görsel Detaylar:**
+- Renk paleti: #e74c3c (kırmızı), #f39c12 (turuncu), #2c3e50 (koyu mavi)
+- Font: 'Poppins', sans-serif
+- Butonlar: 8px border-radius, box-shadow
+- Ürün kartları: 5px gölge, hover'da scale(1.03)
+
+**Örnek Veri Yapısı (app.js):**
+const menu = [
+  { id: 1, name: "Adana Kebab", price: 120, category: "kebap", popular: true },
+  { id: 2, name: "Urfa Burger", price: 95, category: "burger", popular: false }
+];
