@@ -1,4 +1,963 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Kebab Tilburg - Online Bestellen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #f39c12;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+            --flag-red: #AE1C28;
+            --flag-blue: #21468B;
+            --flag-white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            width: 40px;
+            height: 30px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .lang-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .nl-flag {
+            background: linear-gradient(to bottom, 
+                var(--flag-red) 0%, 
+                var(--flag-red) 33%, 
+                var(--flag-white) 33%, 
+                var(--flag-white) 66%, 
+                var(--flag-blue) 66%, 
+                var(--flag-blue) 100%);
+        }
+
+        .en-flag {
+            background: 
+                linear-gradient(to bottom, 
+                    transparent 0%, 
+                    transparent 40%, 
+                    var(--flag-red) 40%, 
+                    var(--flag-red) 60%, 
+                    transparent 60%, 
+                    transparent 100%),
+                linear-gradient(to right, 
+                    transparent 0%, 
+                    transparent 40%, 
+                    var(--flag-red) 40%, 
+                    var(--flag-red) 60%, 
+                    transparent 60%, 
+                    transparent 100%),
+                var(--flag-blue);
+            background-size: 50% 50%, 50% 50%, cover;
+            background-position: top left, top left;
+            background-repeat: no-repeat;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn.primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn.primary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn.secondary:hover {
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-icon i {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .cart-icon span {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Hero Banner */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .location-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .location-badge i {
+            color: var(--secondary);
+        }
+
+        /* Kategori Filtreleri */
+        .categories {
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .categories h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            background-color: var(--light);
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Menü Ürünleri */
+        .menu-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 5rem;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-card h3 {
+            padding: 1rem 1rem 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-card .price {
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card .description {
+            padding: 0 1rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 60px;
+        }
+
+        .menu-card button {
+            width: calc(100% - 2rem);
+            margin: 0 1rem 1rem;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Sepet */
+        #cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: right 0.4s ease;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-item-actions button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-summary {
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .summary-row.total {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .footer-section p {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-section .hours {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .menu-cards {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            #cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dil Seçici -->
+    <div class="language-switcher">
+        <div class="lang-btn nl-flag active" data-lang="nl" title="Nederlands"></div>
+        <div class="lang-btn en-flag" data-lang="en" title="English"></div>
+    </div>
+
+    <!-- Üst Navigasyon -->
+    <nav>
+        <div class="logo">
+            <img src="https://i.ibb.co/0XWx0tG/kebab-logo.png" alt="Master Kebab Logo">
+            <div class="logo-text">Master<span>Kebab</span></div>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active" data-translate="home">Home</a>
+            <a href="#menu" data-translate="menu">Menu</a>
+            <a href="#promotions" data-translate="promotions">Aanbiedingen</a>
+            <a href="#location" data-translate="location">Locatie</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn secondary" data-translate="login">Inloggen</button>
+            <div class="cart-icon">
+                <span id="cart-count">0</span>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-translate="hero_title">De Beste Kebab van Tilburg</h1>
+            <p data-translate="hero_subtitle">Traditionele Turkse smaken met een moderne twist</p>
+            <button class="btn primary" data-translate="order_now">Nu Bestellen</button>
+        </div>
+        <div class="location-badge">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Tilburg Centrum</span>
+        </div>
+    </section>
+
+    <!-- Kategori Filtreleri -->
+    <section class="categories" id="menu">
+        <h2 data-translate="menu_title">Ons Menu</h2>
+        <div class="category-filters">
+            <button class="filter-btn active" data-translate="all">Alles</button>
+            <button class="filter-btn" data-translate="kebabs">Kebabs</button>
+            <button class="filter-btn" data-translate="burgers">Burgers</button>
+            <button class="filter-btn" data-translate="chicken">Kip</button>
+            <button class="filter-btn" data-translate="salads">Salades</button>
+            <button class="filter-btn" data-translate="desserts">Desserts</button>
+        </div>
+    </section>
+
+    <!-- Menü Ürünleri -->
+    <section class="menu-cards">
+        <!-- Ürünler JavaScript ile dinamik olarak eklenecek -->
+    </section>
+
+    <!-- Sepet Sidebar -->
+    <aside id="cart-sidebar">
+        <div class="cart-header">
+            <h3 data-translate="your_cart">Jouw Winkelwagen</h3>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items">
+            <!-- Sepet öğeleri buraya gelecek -->
+        </div>
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span data-translate="subtotal">Subtotaal</span>
+                <span id="subtotal">€0.00</span>
+            </div>
+            <div class="summary-row">
+                <span data-translate="delivery">Bezorgkosten</span>
+                <span>€2.50</span>
+            </div>
+            <div class="summary-row total">
+                <span data-translate="total">Totaal</span>
+                <span id="total">€2.50</span>
+            </div>
+            <button class="btn primary checkout-btn" data-translate="checkout">Naar betaling</button>
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Master Kebab Tilburg</h4>
+                <p data-translate="footer_slogan">De beste kebab in Tilburg sinds 2010</p>
+            </div>
+            <div class="footer-section">
+                <h4 data-translate="contact">Contact</h4>
+                <p><i class="fas fa-phone"></i> +31 13 543 2109</p>
+                <p><i class="fas fa-envelope"></i> info@masterkebab.nl</p>
+                <p><i class="fas fa-map-marker-alt"></i> Kerkstraat 45, Tilburg</p>
+            </div>
+            <div class="footer-section">
+                <h4 data-translate="opening_hours">Openingstijden</h4>
+                <div class="hours">
+                    <span data-translate="monday_friday">Ma-Vr:</span>
+                    <span>11:00 - 22:00</span>
+                </div>
+                <div class="hours">
+                    <span data-translate="saturday">Za:</span>
+                    <span>12:00 - 23:00</span>
+                </div>
+                <div class="hours">
+                    <span data-translate="sunday">Zo:</span>
+                    <span>13:00 - 21:00</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 Master Kebab Tilburg. <span data-translate="rights">Alle rechten voorbehouden</span>.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Çeviriler
+        const translations = {
+            nl: {
+                home: "Home",
+                menu: "Menu",
+                promotions: "Aanbiedingen",
+                location: "Locatie",
+                login: "Inloggen",
+                hero_title: "De Beste Kebab van Tilburg",
+                hero_subtitle: "Traditionele Turkse smaken met een moderne twist",
+                order_now: "Nu Bestellen",
+                menu_title: "Ons Menu",
+                all: "Alles",
+                kebabs: "Kebabs",
+                burgers: "Burgers",
+                chicken: "Kip",
+                salads: "Salades",
+                desserts: "Desserts",
+                your_cart: "Jouw Winkelwagen",
+                subtotal: "Subtotaal",
+                delivery: "Bezorgkosten",
+                total: "Totaal",
+                checkout: "Naar betaling",
+                footer_slogan: "De beste kebab in Tilburg sinds 2010",
+                contact: "Contact",
+                opening_hours: "Openingstijden",
+                monday_friday: "Ma-Vr:",
+                saturday: "Za:",
+                sunday: "Zo:",
+                rights: "Alle rechten voorbehouden",
+                add_to_cart: "In winkelwagen",
+                description: "Beschrijving",
+                popular: "POPULAIR"
+            },
+            en: {
+                home: "Home",
+                menu: "Menu",
+                promotions: "Promotions",
+                location: "Location",
+                login: "Login",
+                hero_title: "The Best Kebab in Tilburg",
+                hero_subtitle: "Traditional Turkish flavors with a modern twist",
+                order_now: "Order Now",
+                menu_title: "Our Menu",
+                all: "All",
+                kebabs: "Kebabs",
+                burgers: "Burgers",
+                chicken: "Chicken",
+                salads: "Salads",
+                desserts: "Desserts",
+                your_cart: "Your Cart",
+                subtotal: "Subtotal",
+                delivery: "Delivery Fee",
+                total: "Total",
+                checkout: "Checkout",
+                footer_slogan: "The best kebab in Tilburg since 2010",
+                contact: "Contact",
+                opening_hours: "Opening Hours",
+                monday_friday: "Mon-Fri:",
+                saturday: "Sat:",
+                sunday: "Sun:",
+                rights: "All rights reserved",
+                add_to_cart: "Add to Cart",
+                description: "Description",
+                popular: "POPULAR"
+            }
+        };
+
+        // Ürün verileri (Hollandaca ve İngilizce)
+        const products = [
+            {
+                id: 1,
+                name_nl: "Adana Kebab",
+                name_en: "Adana Kebab",
+                price: 8.50,
+                category: "kebabs",
+                popular: true,
+                description_nl: "Pittige gehakt spies geserveerd met rijst en salade",
+                description_en: "Spicy minced meat skewer served with rice and salad"
+            },
+            {
+                id: 2,
+                name_nl: "Urfa Burger",
+                name_en: "Urfa Burger",
+                price: 7.90,
+                category: "burgers",
+                popular: true,
+                description_nl: "Burger met Urfa kruiden, verse groenten en saus",
+                description_en: "Burger with Urfa spices, fresh vegetables and sauce"
+            },
+            {
+                id: 3,
+                name_nl: "Kip Kebab",
+                name_en: "Chicken Kebab",
+                price: 8.00,
+                category: "chicken",
+                popular: false,
+                description_nl: "Gemarineerde kip spies met rijst en gegrilde groenten",
+                description_en: "Marinated chicken skewer with rice and grilled vegetables"
+            },
+            {
+                id: 4,
+                name_nl: "Kebab Schotel",
+                name_en: "Kebab Plate",
+                price: 11.50,
+                category: "kebabs",
+                popular: true,
+                description_nl: "Gegrilde kebab met friet, salade en speciale saus",
+                description_en: "Grilled kebab with fries, salad and special sauce"
+            },
+            {
+                id: 5,
+                name_nl: "Falafel Wrap",
+                name_en: "Falafel Wrap",
+                price: 6.50,
+                category: "salads",
+                popular: false,
+                description_nl: "Verse falafel met groenten en tahinisaus in een wrap",
+                description_en: "Fresh falafel with vegetables and tahini sauce in a wrap"
+            },
+            {
+                id: 6,
+                name_nl: "Baklava",
+                name_en: "Baklava",
+                price: 4.50,
+                category: "desserts",
+                popular: false,
+                description_nl: "Zoet gebak met noten en honing",
+                description_en: "Sweet pastry with nuts and honey"
+            }
+        ];
+
+        // Uygulama durumu
+        let currentLanguage = 'nl';
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Sayfa yüklendiğinde çalışacak fonksiyon
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dil değiştirme butonları
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelector('.lang-btn.active').classList.remove('active');
+                    btn.classList.add('active');
+                    currentLanguage = btn.dataset.lang;
+                    translatePage();
+                });
+            });
+
+            // Menüyü oluştur
+            renderMenu();
+            
+            // Sepeti güncelle
+            updateCart();
+            
+            // Sayfayı çevir
+            translatePage();
+        });
+
+        // Sayfayı çevir
+        function translatePage() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                element.textContent = translations[currentLanguage][key];
+            });
+        }
+
+        // Menüyü oluştur
+        function renderMenu() {
+            const menuContainer = document.querySelector('.menu-cards');
+            menuContainer.innerHTML = '';
+            
+            products.forEach(product => {
+                const productName = currentLanguage === 'nl' ? product.name_nl : product.name_en;
+                const description = currentLanguage === 'nl' ? product.description_nl : product.description_en;
+                
+                menuContainer.innerHTML += `
+                    <div class="menu-card">
+                        ${product.popular ? `<span class="popular-badge">${translations[currentLanguage]['popular']}</span>` : ''}
+                        <img src="https://source.unsplash.com/random/400x300/?kebab,${product.id}" alt="${productName}">
+                        <h3>${productName}</h3>
+                        <div class="price">€${product.price.toFixed(2)}</div>
+                        <div class="description">${description}</div>
+                        <button class="btn primary" onclick="addToCart(${product.id})">${translations[currentLanguage]['add_to_cart']}</button>
+                    </div>
+                `;
+            });
+        }
+
+        // Sepete ekle
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Ürün adını ve açıklamasını seçilen dile göre al
+            const productName = currentLanguage === 'nl' ? product.name_nl : product.name_en;
+            
+            // Sepette bu ürün var mı kontrol et
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: productName,
+                    price: product.price,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Sepeti göster
+            document.getElementById('cart-sidebar').classList.add('open');
+        }
+
+        // Sepeti güncelle
+        function updateCart() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            
+            // Sepet sayısını güncelle
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Sepet öğelerini güncelle
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `<div style="text-align:center; padding:20px;">${currentLanguage === 'nl' ? 'Uw winkelwagen is leeg' : 'Your cart is empty'}</div>`;
+                subtotalElement.textContent = '€0.00';
+                totalElement.textContent = '€2.50';
+            } else {
+                let subtotal = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    
+                    cartItemsContainer.innerHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <h4>${item.name}</h4>
+                                <p>€${item.price.toFixed(2)} × ${item.quantity}</p>
+                            </div>
+                            <div class="cart-item-actions">
+                                <button onclick="changeQuantity(${item.id}, -1)">-</button>
+                                <button onclick="changeQuantity(${item.id}, 1)">+</button>
+                                <button class="remove-btn" onclick="removeFromCart(${item.id})">×</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                const total = subtotal + 2.50; // Teslimat ücreti
+                subtotalElement.textContent = `€${subtotal.toFixed(2)}`;
+                totalElement.textContent = `€${total.toFixed(2)}`;
+            }
+            
+            // Sepeti localStorage'a kaydet
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Miktarı değiştir
+        function changeQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (!item) return;
+            
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== productId);
+            }
+            
+            updateCart();
+        }
+
+        // Sepetten kaldır
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        // Sepeti kapat
+        document.querySelector('.close-cart').addEventListener('click', () => {
+            document.getElementById('cart-sidebar').classList.remove('open');
+        });
+
+        // Sepeti aç
+        document.querySelector('.cart-icon').addEventListener('click', () => {
+            document.getElementById('cart-sidebar').classList.add('open');
+        });
+    </script>
+</body>
+</html> html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
