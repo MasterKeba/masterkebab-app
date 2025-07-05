@@ -1,49 +1,166 @@
-"MasterKebab fast food restoranı için modern bir web uygulaması geliştir. 
-Tüm kodlar tek sayfada çalışsın (SPA). 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasterKebab - Online Sipariş</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Üst Navigasyon -->
+    <nav>
+        <div class="logo">Master<span>Kebab</span></div>
+        <div class="nav-links">
+            <a href="#" class="active">Ana Sayfa</a>
+            <a href="#menu">Menü</a>
+            <a href="#kampanyalar">Kampanyalar</a>
+            <a href="#lokasyon">Lokasyon</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn secondary">Giriş Yap</button>
+            <div class="cart-icon">
+                <span id="cart-count">0</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/>
+                </svg>
+            </div>
+        </div>
+    </nav>
 
-**Temel Özellikler:**
-1. Ana Sayfa:
-   - Büyük hero banner (1100px) arka plan resmi alanı
-   - Kayan promosyon barı (CSS animasyonlu)
-   - Hızlı erişim butonları: Menü, Kampanyalar, Lokasyon
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Türkiye'nin En Lezzetli Kebapları</h1>
+            <p>Özel baharatlarla hazırlanan, geleneksel lezzetlerimizi keşfedin</p>
+            <button class="btn primary">Hemen Sipariş Ver</button>
+        </div>
+        <div class="promo-bar">
+            <div class="promo-text">⭐ Haftanın Özel Menüsü: Adana Kebab + İçecek + Tatlı = 120₺</div>
+        </div>
+    </section>
 
-2. Akıllı Menü Sistemi:
-   - Kategoriler: Kebaplar, Burgerler, Tavuk, Salatalar
-   - Dinamik ürün kartları (resim, fiyat, popüler etiketi)
-   - Özelleştirme modali: 
-     * Sos seçimi (Acılı, Yoğurtlu, Özel) 
-     * Ekstralar (Peynir +₺5, Zeytin +₺3)
-     * Not alanı
+    <!-- Kategori Filtreleri -->
+    <section class="categories" id="menu">
+        <h2>Lezzetli Menümüz</h2>
+        <div class="category-filters">
+            <button class="filter-btn active">Tümü</button>
+            <button class="filter-btn">Kebaplar</button>
+            <button class="filter-btn">Burgerler</button>
+            <button class="filter-btn">Tavuk</button>
+            <button class="filter-btn">Salatalar</button>
+            <button class="filter-btn">Tatlılar</button>
+        </div>
+    </section>
 
-3. Sepet ve Ödeme:
-   - Gerçek zamanlı sepet güncelleme
-   - Teslimat tipi seçimi (Gel Al / Getir)
-   - Adres entegrasyonu (Google Maps iframe)
-   - Ödeme simülasyonu (kredi kartı görseli)
+    <!-- Menü Ürünleri -->
+    <section class="menu-cards">
+        <!-- Dinamik olarak app.js ile doldurulacak -->
+    </section>
 
-4. Mobil Uyum:
-   - Responsive hamburger menü
-   - Viewport uyumlu grid sistemi
+    <!-- Sepet Sidebar -->
+    <aside id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Sepetiniz</h3>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items">
+            <!-- Sepet öğeleri buraya gelecek -->
+        </div>
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Ara Toplam</span>
+                <span id="subtotal">0₺</span>
+            </div>
+            <div class="summary-row">
+                <span>Teslimat Ücreti</span>
+                <span>10₺</span>
+            </div>
+            <div class="summary-row total">
+                <span>Toplam</span>
+                <span id="total">10₺</span>
+            </div>
+            <button class="btn primary checkout-btn">Ödemeye Geç</button>
+        </div>
+    </aside>
 
-**Teknik Gereksinimler:**
-- Pure JavaScript (harici kütüphane YOK)
-- CSS Flexbox/Grid kullan
-- localStorage ile sepet kalıcılığı
-- Tüm fonksiyonlar app.js'de
-- Tek HTML dosyasında bileşenler:
-   • <div id="hero"></div>
-   • <section class="menu-cards"></section>
-   • <aside id="cart-sidebar"></aside>
-   • <div id="custom-modal" class="hidden"></div>
+    <!-- Özelleştirme Modalı -->
+    <div id="custom-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-title">Adana Kebab</h3>
+            <div class="custom-options">
+                <h4>Sos Seçimi</h4>
+                <div class="option-group">
+                    <label class="option">
+                        <input type="radio" name="sauce" value="acili" checked>
+                        Acılı Sos
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="sauce" value="yogurtlu">
+                        Yoğurtlu Sos
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="sauce" value="ozel">
+                        Özel Sos (+5₺)
+                    </label>
+                </div>
 
-**Görsel Detaylar:**
-- Renk paleti: #e74c3c (kırmızı), #f39c12 (turuncu), #2c3e50 (koyu mavi)
-- Font: 'Poppins', sans-serif
-- Butonlar: 8px border-radius, box-shadow
-- Ürün kartları: 5px gölge, hover'da scale(1.03)
+                <h4>Ekstralar</h4>
+                <div class="option-group">
+                    <label class="option">
+                        <input type="checkbox" name="extra" value="peynir">
+                        Ekstra Peynir (+5₺)
+                    </label>
+                    <label class="option">
+                        <input type="checkbox" name="extra" value="zeytin">
+                        Zeytin (+3₺)
+                    </label>
+                    <label class="option">
+                        <input type="checkbox" name="extra" value="biber">
+                        Biber (+2₺)
+                    </label>
+                </div>
 
-**Örnek Veri Yapısı (app.js):**
-const menu = [
-  { id: 1, name: "Adana Kebab", price: 120, category: "kebap", popular: true },
-  { id: 2, name: "Urfa Burger", price: 95, category: "burger", popular: false }
-];
+                <h4>Özel Not</h4>
+                <textarea placeholder="Ekstra notunuzu buraya yazın..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary cancel-btn">İptal</button>
+                <button class="btn primary add-to-cart-btn">Sepete Ekle</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>MasterKebab</h4>
+                <p>Türkiye'nin en lezzetli kebapları için doğru adres</p>
+            </div>
+            <div class="footer-section">
+                <h4>İletişim</h4>
+                <p>📞 0 (212) 123 45 67</p>
+                <p>✉️ info@masterkebab.com</p>
+                <p>📍 İstanbul, Türkiye</p>
+            </div>
+            <div class="footer-section">
+                <h4>Çalışma Saatleri</h4>
+                <p>Pazartesi - Cuma: 10:00 - 00:00</p>
+                <p>Hafta Sonu: 11:00 - 01:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 MasterKebab. Tüm hakları saklıdır.</p>
+            <div class="social-icons">
+                <a href="#">FB</a>
+                <a href="#">IG</a>
+                <a href="#">TW</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
