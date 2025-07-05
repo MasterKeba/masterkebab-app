@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Master Kebab</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <h1>Welcome to Master Kebab!</h1>
-  <p>Best kebab in town 🍢🔥</p>
-  <button onclick="showMessage()">Click me</button>
-  <p id="Eetsmakelijk"></p>
-
-  <script src="app.js"></script>
-</body>
-</html>
+graph TD
+  A[Müşteri Web’e Giriş] --> B{Kampanya Görüntüle}
+  B --> C[Menüde Gezin + Özelleştir]
+  C --> D[Sepete Ekle]
+  D --> E[Ödeme Yap]
+  E --> F[Sipariş Restoran Paneline Uyarı Olarak Gelir]
+  F --> G[Stok Otomatik Güncellenir]
+  G --> H[Müşteriye SMS/Push ile Durum Bilgisi]
